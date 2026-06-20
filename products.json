@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "name": "Smart Neck & Shoulder Massager",
+    "tagline": "Deep-Tissue Relief, Reinvented",
+    "description": "An intelligent EMS pulse massager with 6 massage modes, 15 intensity levels, and ergonomic heated pads. Targets cervical tension, promotes blood circulation, and melts away stress in minutes. Rechargeable, whisper-quiet, and travel-friendly.",
+    "price": 39.99,
+    "originalPrice": 79.99,
+    "rating": 4.8,
+    "reviews": 2847,
+    "badge": "Best Seller",
+    "category": "Massage",
+    "features": [
+      "6 Massage Modes & 15 Intensity Levels",
+      "Intelligent Heat Therapy up to 42°C",
+      "Ergonomic 4D Fit Design",
+      "USB-C Rechargeable — 2 Week Battery"
+    ],
+    "image": "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=600&h=600&fit=crop&q=80",
+    "affiliateUrl": "https://www.aliexpress.com/item/REPLACE_WITH_YOUR_PRODUCT_ID_1.html"
+  },
+  {
+    "id": 2,
+    "name": "Anti-Gravity Flame Aroma Diffuser",
+    "tagline": "Mesmerizing Mist, Elevated Calm",
+    "description": "A stunning ultrasonic diffuser that creates a gravity-defying water droplet effect resembling a flickering flame. Whisper-quiet humidifier with 7 ambient LED color modes, auto shut-off safety, and compatibility with all essential oils. Transforms any room into a spa sanctuary.",
+    "price": 27.99,
+    "originalPrice": 54.99,
+    "rating": 4.7,
+    "reviews": 3612,
+    "badge": "Trending",
+    "category": "Aromatherapy",
+    "features": [
+      "Gravity-Defying Water Drop Visual Effect",
+      "7 Ambient LED Color Modes",
+      "Whisper-Quiet Ultrasonic Technology",
+      "Auto Shut-Off Safety Sensor"
+    ],
+    "image": "https://images.unsplash.com/photo-1602928321679-560bb453f190?w=600&h=600&fit=crop&q=80",
+    "affiliateUrl": "https://www.aliexpress.com/item/REPLACE_WITH_YOUR_PRODUCT_ID_2.html"
+  },
+  {
+    "id": 3,
+    "name": "Smart LED Facial Therapy Mask",
+    "tagline": "Clinical-Grade Glow, At Home",
+    "description": "A professional 7-color LED photon therapy mask delivering targeted wavelengths for anti-aging, acne treatment, and skin rejuvenation. Medical-grade silicone, adjustable intensity, and a built-in 20-minute smart timer. Dermatologist-recommended technology now accessible at home.",
+    "price": 34.99,
+    "originalPrice": 69.99,
+    "rating": 4.9,
+    "reviews": 1953,
+    "badge": "Editor's Pick",
+    "category": "Skincare",
+    "features": [
+      "7-Color LED Photon Therapy",
+      "Medical-Grade Silicone Construction",
+      "Adjustable Intensity with Smart Timer",
+      "FDA-Registered & Dermatologist Recommended"
+    ],
+    "image": "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=600&h=600&fit=crop&q=80",
+    "affiliateUrl": "https://www.aliexpress.com/item/REPLACE_WITH_YOUR_PRODUCT_ID_3.html"
+  }
+]

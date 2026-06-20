@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NeatSpace SelfCare — Smart Self-Care & Relaxation Gadgets</title>
+  <meta name="description" content="Discover premium smart self-care and relaxation gadgets. From intelligent massagers to ambient aroma diffusers and LED therapy masks — elevate your wellness ritual." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='14' fill='%2310B981'/><path d='M16 8c-2 0-4 2-4 5s2 5 4 7c2-2 4-4 4-7s-2-5-4-5z' fill='%23fff'/></svg>" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            velvet:  { DEFAULT: '#0F172A', light: '#1E293B', mid: '#334155' },
+            sage:    { DEFAULT: '#10B981', light: '#34D399', dark: '#059669', pale: '#D1FAE5' },
+            teal:    { DEFAULT: '#14B8A6', light: '#2DD4BF' },
+            cream:   { DEFAULT: '#FFF8F0', warm: '#FFFBEB' },
+            rose:    { glow: '#FDA4AF', soft: '#FFE4E6' },
+            gold:    { DEFAULT: '#F59E0B', glow: '#FCD34D' }
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            serif: ['Playfair Display', 'Georgia', 'serif']
+          },
+          backdropBlur: { xs: '2px' },
+          animation: {
+            'float': 'float 6s ease-in-out infinite',
+            'glow-pulse': 'glowPulse 3s ease-in-out infinite',
+            'slide-up': 'slideUp 0.6s ease-out',
+            'fade-in': 'fadeIn 0.8s ease-out',
+            'shimmer': 'shimmer 2s linear infinite',
+            'drawer-in': 'drawerIn 0.35s cubic-bezier(0.16,1,0.3,1)',
+            'drawer-out': 'drawerOut 0.3s cubic-bezier(0.7,0,0.84,0)',
+          },
+          keyframes: {
+            float: { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-12px)' } },
+            glowPulse: { '0%,100%': { opacity: '0.4' }, '50%': { opacity: '1' } },
+            slideUp: { from: { opacity: '0', transform: 'translateY(30px)' }, to: { opacity: '1', transform: 'translateY(0)' } },
+            fadeIn: { from: { opacity: '0' }, to: { opacity: '1' } },
+            shimmer: { '0%': { backgroundPosition: '-200% 0' }, '100%': { backgroundPosition: '200% 0' } },
+            drawerIn: { from: { transform: 'translateX(100%)' }, to: { transform: 'translateX(0)' } },
+            drawerOut: { from: { transform: 'translateX(0)' }, to: { transform: 'translateX(100%)' } },
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* === Global === */
+    *, *::before, *::after { box-sizing: border-box; }
+    body { font-family: 'Inter', system-ui, sans-serif; background: #0F172A; color: #F1F5F9; overflow-x: hidden; }
+    ::selection { background: #10B981; color: #fff; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #1E293B; }
+    ::-webkit-scrollbar-thumb { background: #10B981; border-radius: 99px; }
+
+    /* === Glassmorphism Utility === */
+    .glass { background: rgba(30, 41, 59, 0.55); backdrop-filter: blur(18px) saturate(1.6); -webkit-backdrop-filter: blur(18px) saturate(1.6); border: 1px solid rgba(255,255,255,0.08); }
+    .glass-strong { background: rgba(15, 23, 42, 0.78); backdrop-filter: blur(24px) saturate(1.8); -webkit-backdrop-filter: blur(24px) saturate(1.8); border: 1px solid rgba(255,255,255,0.10); }
+
+    /* === Glow Effects === */
+    .glow-sage { box-shadow: 0 0 30px rgba(16,185,129,0.15), 0 0 60px rgba(16,185,129,0.06); }
+    .glow-sage-hover:hover { box-shadow: 0 0 40px rgba(16,185,129,0.25), 0 0 80px rgba(16,185,129,0.10); }
+    .glow-rose { box-shadow: 0 0 25px rgba(253,164,175,0.12); }
+    .glow-gold { box-shadow: 0 0 25px rgba(245,158,11,0.12); }
+    .text-glow { text-shadow: 0 0 30px rgba(16,185,129,0.35); }
+
+    /* === Badge Shimmer === */
+    .badge-shimmer { background: linear-gradient(110deg, #10B981 30%, #34D399 50%, #10B981 70%); background-size: 200% 100%; }
+
+    /* === Card hover === */
+    .product-card { transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), box-shadow 0.4s ease; }
+    .product-card:hover { transform: translateY(-6px); }
+
+    /* === Overlay === */
+    .cart-overlay { background: rgba(0,0,0,0.55); backdrop-filter: blur(4px); }
+
+    /* === Hero BG orbs === */
+    .orb { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.18; pointer-events: none; }
+
+    /* === Search focus ring === */
+    .search-input:focus { box-shadow: 0 0 0 3px rgba(16,185,129,0.3); }
+
+    /* === Star fill === */
+    .star-filled { color: #F59E0B; }
+    .star-empty  { color: #475569; }
+  </style>
+</head>
+<body class="min-h-screen antialiased">
+
+  <!-- ============================================================ -->
+  <!--  NAVBAR                                                       -->
+  <!-- ============================================================ -->
+  <nav id="navbar" class="fixed top-0 inset-x-0 z-50 transition-all duration-500 glass-strong">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 sm:h-18">
+
+        <!-- Logo -->
+        <a href="#" class="flex items-center gap-2 group">
+          <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-sage to-teal flex items-center justify-center shadow-lg group-hover:shadow-sage/30 transition-shadow">
+            <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8 2 6 6 6 9c0 4 3 7 6 10 3-3 6-6 6-10 0-3-2-7-6-7z"/><path d="M12 11V6"/><path d="M9.5 8.5L12 6l2.5 2.5"/></svg>
+          </div>
+          <span class="font-serif text-xl font-semibold tracking-tight text-cream">NeatSpace</span>
+        </a>
+
+        <!-- Desktop Nav Links -->
+        <div class="hidden md:flex items-center gap-8">
+          <a href="#products" class="text-sm font-medium text-slate-300 hover:text-sage transition-colors">Shop</a>
+          <a href="#features" class="text-sm font-medium text-slate-300 hover:text-sage transition-colors">Why Us</a>
+          <a href="#newsletter" class="text-sm font-medium text-slate-300 hover:text-sage transition-colors">Newsletter</a>
+          <a href="privacy.html" class="text-sm font-medium text-slate-300 hover:text-sage transition-colors">Privacy</a>
+        </div>
+
+        <!-- Right Icons -->
+        <div class="flex items-center gap-3">
+          <!-- Search Toggle (Mobile) -->
+          <button id="searchToggleBtn" class="md:hidden p-2 rounded-xl text-slate-300 hover:text-sage hover:bg-white/5 transition-all" aria-label="Toggle search">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </button>
+
+          <!-- Cart Button -->
+          <button id="cartBtn" class="relative p-2 rounded-xl text-slate-300 hover:text-sage hover:bg-white/5 transition-all" aria-label="Open cart">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+            <span id="cartCount" class="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-sage text-[10px] font-bold text-white flex items-center justify-center opacity-0 scale-0 transition-all duration-300">0</span>
+          </button>
+
+          <!-- Mobile Menu Toggle -->
+          <button id="mobileMenuBtn" class="md:hidden p-2 rounded-xl text-slate-300 hover:text-sage hover:bg-white/5 transition-all" aria-label="Toggle menu">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div id="mobileMenu" class="md:hidden hidden pb-4 border-t border-white/5 mt-1 pt-3 space-y-2">
+        <a href="#products" class="block px-3 py-2 rounded-lg text-sm text-slate-300 hover:bg-white/5 hover:text-sage transition-all">Shop</a>
+        <a href="#features" class="block px-3 py-2 rounded-lg text-sm text-slate-300 hover:bg-white/5 hover:text-sage transition-all">Why Us</a>
+        <a href="#newsletter" class="block px-3 py-2 rounded-lg text-sm text-slate-300 hover:bg-white/5 hover:text-sage transition-all">Newsletter</a>
+        <a href="privacy.html" class="block px-3 py-2 rounded-lg text-sm text-slate-300 hover:bg-white/5 hover:text-sage transition-all">Privacy</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============================================================ -->
+  <!--  HERO                                                         -->
+  <!-- ============================================================ -->
+  <section class="relative min-h-[92vh] flex items-center justify-center overflow-hidden pt-20">
+    <!-- Background Orbs -->
+    <div class="orb w-[500px] h-[500px] bg-sage/40 top-[-10%] left-[-10%] animate-float"></div>
+    <div class="orb w-[400px] h-[400px] bg-teal/30 bottom-[-8%] right-[-6%] animate-float" style="animation-delay:-3s"></div>
+    <div class="orb w-[250px] h-[250px] bg-rose-glow/20 top-[20%] right-[15%] animate-float" style="animation-delay:-1.5s"></div>
+
+    <div class="relative z-10 max-w-4xl mx-auto px-4 text-center">
+      <!-- Pill Badge -->
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass border border-sage/20 mb-8 animate-fade-in">
+        <span class="w-2 h-2 rounded-full bg-sage animate-glow-pulse"></span>
+        <span class="text-xs font-medium tracking-wider uppercase text-sage-light">Curated Wellness Tech</span>
+      </div>
+
+      <h1 class="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] mb-6 animate-slide-up">
+        <span class="text-cream">Elevate Your</span><br />
+        <span class="bg-gradient-to-r from-sage via-teal to-sage-light bg-clip-text text-transparent text-glow">Self-Care Ritual</span>
+      </h1>
+      <p class="text-base sm:text-lg md:text-xl text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed animate-slide-up" style="animation-delay:0.15s">
+        Discover handpicked smart gadgets that transform ordinary routines into luxurious wellness experiences. Science-backed. Beautifully designed. Effortlessly calming.
+      </p>
+
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 animate-slide-up" style="animation-delay:0.3s">
+        <a href="#products" class="group inline-flex items-center gap-2 px-8 py-3.5 rounded-2xl bg-gradient-to-r from-sage to-teal text-white font-semibold shadow-lg shadow-sage/20 hover:shadow-sage/40 hover:scale-[1.03] transition-all duration-300">
+          Explore Collection
+          <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+        <a href="#features" class="inline-flex items-center gap-2 px-8 py-3.5 rounded-2xl glass border border-white/10 text-slate-300 font-medium hover:border-sage/30 hover:text-sage transition-all duration-300">
+          Learn More
+        </a>
+      </div>
+
+      <!-- Trust Row -->
+      <div class="flex flex-wrap items-center justify-center gap-6 sm:gap-10 mt-14 animate-fade-in" style="animation-delay:0.5s">
+        <div class="flex items-center gap-2 text-slate-500 text-sm">
+          <svg class="w-4 h-4 text-sage" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Secure Shopping
+        </div>
+        <div class="flex items-center gap-2 text-slate-500 text-sm">
+          <svg class="w-4 h-4 text-sage" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+          Free Worldwide Shipping
+        </div>
+        <div class="flex items-center gap-2 text-slate-500 text-sm">
+          <svg class="w-4 h-4 text-sage" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          8,400+ Happy Customers
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!--  SEARCH BAR                                                   -->
+  <!-- ============================================================ -->
+  <section id="products" class="relative pt-6 pb-2">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-10">
+        <h2 class="font-serif text-3xl sm:text-4xl font-bold text-cream mb-3">Our Curated Collection</h2>
+        <p class="text-slate-400 max-w-xl mx-auto">Each product is rigorously tested and chosen for its innovation, build quality, and ability to genuinely enhance your well-being.</p>
+      </div>
+
+      <!-- Search Input -->
+      <div class="max-w-xl mx-auto mb-10" id="searchBarDesktop">
+        <div class="relative group">
+          <div class="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
+            <svg class="w-5 h-5 text-slate-500 group-focus-within:text-sage transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </div>
+          <input id="searchInput" type="text" placeholder="Search massagers, diffusers, skincare tech..." class="search-input w-full pl-12 pr-12 py-3.5 rounded-2xl glass border border-white/10 text-cream placeholder-slate-500 text-sm focus:outline-none focus:border-sage/40 transition-all duration-300" />
+          <button id="clearSearchBtn" class="absolute inset-y-0 right-0 flex items-center pr-4 text-slate-500 hover:text-sage transition-colors hidden" aria-label="Clear search">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile search (hidden by default, toggled) -->
+      <div id="mobileSearchBar" class="md:hidden hidden max-w-xl mx-auto mb-6 px-2">
+        <div class="relative group">
+          <div class="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
+            <svg class="w-5 h-5 text-slate-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </div>
+          <input id="mobileSearchInput" type="text" placeholder="Search products..." class="search-input w-full pl-12 pr-4 py-3 rounded-2xl glass border border-white/10 text-cream placeholder-slate-500 text-sm focus:outline-none focus:border-sage/40 transition-all" />
+        </div>
+      </div>
+
+      <!-- No Results Message -->
+      <div id="noResults" class="hidden text-center py-16">
+        <svg class="w-16 h-16 mx-auto text-slate-600 mb-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="8" y1="8" x2="14" y2="14"/><line x1="14" y1="8" x2="8" y2="14"/></svg>
+        <h3 class="text-xl font-semibold text-slate-400 mb-2">No products found</h3>
+        <p class="text-slate-500 text-sm">Try adjusting your search terms</p>
+      </div>
+
+      <!-- ============================================================ -->
+      <!--  PRODUCT GRID                                                 -->
+      <!-- ============================================================ -->
+      <div id="productGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        <!-- Products injected by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!--  FEATURES / WHY US                                            -->
+  <!-- ============================================================ -->
+  <section id="features" class="py-24 relative overflow-hidden">
+    <div class="orb w-[350px] h-[350px] bg-teal/20 bottom-0 left-[-5%]"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="font-serif text-3xl sm:text-4xl font-bold text-cream mb-3">Why NeatSpace SelfCare</h2>
+        <p class="text-slate-400 max-w-lg mx-auto">We combine cutting-edge wellness technology with a seamless shopping experience you can trust.</p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Feature 1 -->
+        <div class="glass rounded-2xl p-6 text-center glow-sage-hover transition-all duration-300 group">
+          <div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-sage/10 flex items-center justify-center group-hover:bg-sage/20 transition-colors">
+            <svg class="w-7 h-7 text-sage" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+          </div>
+          <h3 class="text-cream font-semibold mb-2">Vetted Quality</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">Every product is tested for build quality, effectiveness, and safety before making our collection.</p>
+        </div>
+        <!-- Feature 2 -->
+        <div class="glass rounded-2xl p-6 text-center glow-sage-hover transition-all duration-300 group">
+          <div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-sage/10 flex items-center justify-center group-hover:bg-sage/20 transition-colors">
+            <svg class="w-7 h-7 text-sage" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+          </div>
+          <h3 class="text-cream font-semibold mb-2">Global Shipping</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">Free tracked shipping worldwide. Your wellness essentials delivered straight to your door.</p>
+        </div>
+        <!-- Feature 3 -->
+        <div class="glass rounded-2xl p-6 text-center glow-sage-hover transition-all duration-300 group">
+          <div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-sage/10 flex items-center justify-center group-hover:bg-sage/20 transition-colors">
+            <svg class="w-7 h-7 text-sage" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </div>
+          <h3 class="text-cream font-semibold mb-2">Holistic Wellness</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">Products designed to nurture body, mind, and space — for a complete self-care experience.</p>
+        </div>
+        <!-- Feature 4 -->
+        <div class="glass rounded-2xl p-6 text-center glow-sage-hover transition-all duration-300 group">
+          <div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-sage/10 flex items-center justify-center group-hover:bg-sage/20 transition-colors">
+            <svg class="w-7 h-7 text-sage" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <h3 class="text-cream font-semibold mb-2">24/7 Support</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">Our wellness concierge team is always available to help you choose the perfect product.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!--  NEWSLETTER                                                   -->
+  <!-- ============================================================ -->
+  <section id="newsletter" class="py-24 relative overflow-hidden">
+    <div class="orb w-[300px] h-[300px] bg-sage/20 top-[-10%] right-[-5%]"></div>
+    <div class="max-w-2xl mx-auto px-4 text-center">
+      <div class="glass rounded-3xl p-8 sm:p-12 glow-sage relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-sage/5 via-transparent to-teal/5 pointer-events-none"></div>
+        <div class="relative z-10">
+          <div class="w-16 h-16 mx-auto mb-6 rounded-2xl bg-sage/10 flex items-center justify-center">
+            <svg class="w-8 h-8 text-sage" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <h2 class="font-serif text-2xl sm:text-3xl font-bold text-cream mb-3">Join Our Wellness Circle</h2>
+          <p class="text-slate-400 mb-8 max-w-md mx-auto text-sm leading-relaxed">Get early access to new arrivals, exclusive discounts, and curated wellness tips delivered to your inbox.</p>
+          <form id="newsletterForm" class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+            <input type="email" id="newsletterEmail" placeholder="your@email.com" required class="flex-1 px-5 py-3 rounded-xl glass border border-white/10 text-cream placeholder-slate-500 text-sm focus:outline-none focus:border-sage/40 transition-all" />
+            <button type="submit" class="px-6 py-3 rounded-xl bg-gradient-to-r from-sage to-teal text-white font-semibold text-sm hover:shadow-lg hover:shadow-sage/20 hover:scale-[1.02] transition-all duration-300 whitespace-nowrap">Subscribe</button>
+          </form>
+          <p id="newsletterSuccess" class="hidden mt-4 text-sage text-sm font-medium">Welcome to the circle — check your inbox!</p>
+          <p class="text-slate-600 text-xs mt-4">No spam, ever. Unsubscribe anytime.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!--  FOOTER                                                       -->
+  <!-- ============================================================ -->
+  <footer class="border-t border-white/5 py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-sage to-teal flex items-center justify-center">
+            <svg class="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8 2 6 6 6 9c0 4 3 7 6 10 3-3 6-6 6-10 0-3-2-7-6-7z"/><path d="M12 11V6"/></svg>
+          </div>
+          <span class="font-serif text-lg font-semibold text-cream">NeatSpace SelfCare</span>
+        </div>
+        <div class="flex items-center gap-6 text-sm text-slate-500">
+          <a href="privacy.html" class="hover:text-sage transition-colors">Privacy Policy</a>
+          <a href="#" class="hover:text-sage transition-colors">Terms</a>
+          <a href="mailto:your-email@example.com" class="hover:text-sage transition-colors">Contact</a>
+        </div>
+        <p class="text-xs text-slate-600">Affiliate Disclosure: We earn from qualifying purchases. Prices are set by the retailer.</p>
+      </div>
+      <p class="text-center text-xs text-slate-700 mt-8">Copyright 2024 NeatSpace SelfCare. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- ============================================================ -->
+  <!--  CART DRAWER                                                  -->
+  <!-- ============================================================ -->
+  <div id="cartOverlay" class="cart-overlay fixed inset-0 z-[60] hidden opacity-0 transition-opacity duration-300"></div>
+  <aside id="cartDrawer" class="fixed top-0 right-0 bottom-0 z-[70] w-full max-w-md glass-strong shadow-2xl shadow-black/30 transform translate-x-full" aria-label="Shopping cart">
+    <div class="flex flex-col h-full">
+      <!-- Header -->
+      <div class="flex items-center justify-between px-6 py-5 border-b border-white/5">
+        <div class="flex items-center gap-3">
+          <svg class="w-5 h-5 text-sage" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          <h2 class="font-serif text-lg font-semibold text-cream">Your Cart</h2>
+          <span id="cartItemCount" class="text-xs text-slate-500">(0 items)</span>
+        </div>
+        <button id="closeCartBtn" class="p-2 rounded-xl text-slate-400 hover:text-sage hover:bg-white/5 transition-all" aria-label="Close cart">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+
+      <!-- Cart Items -->
+      <div id="cartItems" class="flex-1 overflow-y-auto px-6 py-4 space-y-4">
+        <!-- Empty State -->
+        <div id="cartEmpty" class="flex flex-col items-center justify-center h-full text-center">
+          <svg class="w-20 h-20 text-slate-700 mb-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          <p class="text-slate-500 font-medium mb-1">Your cart is empty</p>
+          <p class="text-slate-600 text-sm">Browse our collection and add your favorites</p>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div id="cartFooter" class="hidden border-t border-white/5 px-6 py-5">
+        <div class="flex items-center justify-between mb-4">
+          <span class="text-slate-400 text-sm">Subtotal (reference only)</span>
+          <span id="cartSubtotal" class="text-lg font-bold text-cream">$0.00</span>
+        </div>
+        <p class="text-xs text-slate-600 mb-4">Final price and checkout handled by AliExpress. Use individual item buttons above to purchase.</p>
+        <button id="continueShoppingBtn" class="w-full py-3.5 rounded-2xl glass border border-white/10 text-slate-300 font-semibold text-sm hover:border-sage/30 hover:text-sage transition-all duration-300 flex items-center justify-center gap-2">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+          Continue Shopping
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ============================================================ -->
+  <!--  TOAST NOTIFICATION                                           -->
+  <!-- ============================================================ -->
+  <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[80] px-6 py-3 rounded-2xl glass-strong border border-sage/20 text-sage text-sm font-medium shadow-xl shadow-sage/10 opacity-0 translate-y-4 pointer-events-none transition-all duration-400">
+    <div class="flex items-center gap-2">
+      <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      <span id="toastMsg">Added to cart</span>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!--  JAVASCRIPT                                                   -->
+  <!-- ============================================================ -->
+  <script>
+  (function () {
+    'use strict';
+
+    /* ── State ── */
+    let products = [];
+    let cart = [];
+
+    /* ── DOM refs ── */
+    const $ = (sel) => document.querySelector(sel);
+    const $$ = (sel) => document.querySelectorAll(sel);
+
+    const grid           = $('#productGrid');
+    const searchInput    = $('#searchInput');
+    const mobileSearchIn = $('#mobileSearchInput');
+    const clearBtn       = $('#clearSearchBtn');
+    const noResults      = $('#noResults');
+    const cartBtn        = $('#cartBtn');
+    const cartCount      = $('#cartCount');
+    const cartOverlay    = $('#cartOverlay');
+    const cartDrawer     = $('#cartDrawer');
+    const closeCartBtn   = $('#closeCartBtn');
+    const cartItems      = $('#cartItems');
+    const cartEmpty      = $('#cartEmpty');
+    const cartFooter     = $('#cartFooter');
+    const cartSubtotal   = $('#cartSubtotal');
+    const cartItemCount  = $('#cartItemCount');
+    const continueBtn    = $('#continueShoppingBtn');
+    const toast          = $('#toast');
+    const toastMsg       = $('#toastMsg');
+    const mobileMenuBtn  = $('#mobileMenuBtn');
+    const mobileMenu     = $('#mobileMenu');
+    const searchToggle   = $('#searchToggleBtn');
+    const mobileSearchBr = $('#mobileSearchBar');
+    const newsletterForm = $('#newsletterForm');
+
+    /* ── Load Products ── */
+    async function loadProducts() {
+      try {
+        const res = await fetch('products.json');
+        products = await res.json();
+        renderProducts(products);
+      } catch (e) {
+        grid.innerHTML = '<p class="col-span-full text-center text-slate-500 py-12">Unable to load products. Please refresh the page.</p>';
+      }
+    }
+
+    /* ── Star SVG helper ── */
+    function starSVG(filled) {
+      return `<svg class="w-3.5 h-3.5 ${filled ? 'star-filled' : 'star-empty'}" viewBox="0 0 24 24" fill="${filled ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`;
+    }
+
+    function starsHTML(rating) {
+      let s = '';
+      for (let i = 1; i <= 5; i++) s += starSVG(i <= Math.round(rating));
+      return s;
+    }
+
+    /* ── Feature item icon ── */
+    const featureIcon = `<svg class="w-3.5 h-3.5 text-sage flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`;
+
+    /* ── Render Products ── */
+    function renderProducts(list) {
+      if (!list.length) {
+        grid.innerHTML = '';
+        noResults.classList.remove('hidden');
+        return;
+      }
+      noResults.classList.add('hidden');
+
+      grid.innerHTML = list.map((p, idx) => `
+        <article class="product-card glass rounded-3xl overflow-hidden glow-sage-hover group animate-slide-up" style="animation-delay:${idx * 0.1}s" data-id="${p.id}">
+          <!-- Image -->
+          <div class="relative aspect-[4/3] overflow-hidden bg-velvet-light">
+            <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-velvet/60 via-transparent to-transparent"></div>
+            ${p.badge ? `<span class="absolute top-4 left-4 px-3 py-1 rounded-full badge-shimmer animate-shimmer text-[10px] font-bold uppercase tracking-wider text-white">${p.badge}</span>` : ''}
+            ${p.originalPrice ? `<span class="absolute top-4 right-4 px-2.5 py-1 rounded-full bg-rose-500/90 text-[10px] font-bold text-white">-${Math.round((1 - p.price / p.originalPrice) * 100)}%</span>` : ''}
+          </div>
+
+          <!-- Content -->
+          <div class="p-5 sm:p-6">
+            <p class="text-sage text-xs font-semibold uppercase tracking-wider mb-1">${p.category}</p>
+            <h3 class="font-serif text-lg font-bold text-cream mb-1 leading-snug">${p.name}</h3>
+            <p class="text-slate-500 text-xs mb-3 italic">${p.tagline}</p>
+
+            <!-- Rating -->
+            <div class="flex items-center gap-1.5 mb-3">
+              <div class="flex items-center gap-0.5">${starsHTML(p.rating)}</div>
+              <span class="text-xs text-slate-400">${p.rating}</span>
+              <span class="text-xs text-slate-600">(${p.reviews.toLocaleString()})</span>
+            </div>
+
+            <!-- Features -->
+            <ul class="space-y-1.5 mb-5">
+              ${p.features.map(f => `<li class="flex items-start gap-2 text-xs text-slate-400">${featureIcon}<span>${f}</span></li>`).join('')}
+            </ul>
+
+            <!-- Price Row -->
+            <div class="flex items-end gap-2 mb-5">
+              <span class="text-2xl font-bold text-cream">$${p.price.toFixed(2)}</span>
+              ${p.originalPrice ? `<span class="text-sm text-slate-500 line-through">$${p.originalPrice.toFixed(2)}</span>` : ''}
+            </div>
+
+            <!-- Buttons -->
+            <div class="flex flex-col gap-2.5">
+              <a href="${p.affiliateUrl}" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-gradient-to-r from-sage to-teal text-white font-semibold text-sm shadow-lg shadow-sage/15 hover:shadow-sage/30 hover:scale-[1.02] transition-all duration-300">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                Check Price on AliExpress
+              </a>
+              <button onclick="addToCart(${p.id})" class="flex items-center justify-center gap-2 w-full py-3 rounded-xl glass border border-white/10 text-slate-300 font-medium text-sm hover:border-sage/30 hover:text-sage transition-all duration-300">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                Add to Cart
+              </button>
+            </div>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    /* ── Search ── */
+    function handleSearch(query) {
+      const q = query.trim().toLowerCase();
+      clearBtn.classList.toggle('hidden', !q);
+      if (!q) { renderProducts(products); return; }
+
+      const filtered = products.filter(p =>
+        p.name.toLowerCase().includes(q) ||
+        p.tagline.toLowerCase().includes(q) ||
+        p.description.toLowerCase().includes(q) ||
+        p.category.toLowerCase().includes(q) ||
+        p.features.some(f => f.toLowerCase().includes(q))
+      );
+      renderProducts(filtered);
+    }
+
+    searchInput.addEventListener('input', (e) => {
+      handleSearch(e.target.value);
+      if (mobileSearchIn) mobileSearchIn.value = e.target.value;
+    });
+
+    if (mobileSearchIn) {
+      mobileSearchIn.addEventListener('input', (e) => {
+        handleSearch(e.target.value);
+        searchInput.value = e.target.value;
+      });
+    }
+
+    clearBtn.addEventListener('click', () => {
+      searchInput.value = '';
+      if (mobileSearchIn) mobileSearchIn.value = '';
+      handleSearch('');
+      searchInput.focus();
+    });
+
+    /* ── Cart Logic ── */
+    function addToCart(id) {
+      const product = products.find(p => p.id === id);
+      if (!product) return;
+      const existing = cart.find(c => c.id === id);
+      if (existing) { existing.qty++; }
+      else { cart.push({ ...product, qty: 1 }); }
+      updateCartUI();
+      showToast(`${product.name} added to cart`);
+    }
+
+    // Expose globally for onclick
+    window.addToCart = addToCart;
+
+    function removeFromCart(id) {
+      cart = cart.filter(c => c.id !== id);
+      updateCartUI();
+    }
+    window.removeFromCart = removeFromCart;
+
+    function updateQty(id, delta) {
+      const item = cart.find(c => c.id === id);
+      if (!item) return;
+      item.qty += delta;
+      if (item.qty <= 0) { removeFromCart(id); return; }
+      updateCartUI();
+    }
+    window.updateQty = updateQty;
+
+    function updateCartUI() {
+      const total = cart.reduce((s, c) => s + c.qty, 0);
+      const subtotal = cart.reduce((s, c) => s + c.price * c.qty, 0);
+
+      // Badge
+      cartCount.textContent = total;
+      cartCount.classList.toggle('opacity-0', total === 0);
+      cartCount.classList.toggle('scale-0', total === 0);
+      cartCount.classList.toggle('opacity-100', total > 0);
+      cartCount.classList.toggle('scale-100', total > 0);
+
+      // Item count text
+      cartItemCount.textContent = `(${total} item${total !== 1 ? 's' : ''})`;
+
+      // Subtotal
+      cartSubtotal.textContent = `$${subtotal.toFixed(2)}`;
+
+      // Toggle empty / footer
+      if (cart.length === 0) {
+        cartEmpty.classList.remove('hidden');
+        cartFooter.classList.add('hidden');
+        renderCartItems();
+      } else {
+        cartEmpty.classList.add('hidden');
+        cartFooter.classList.remove('hidden');
+        renderCartItems();
+      }
+    }
+
+    function renderCartItems() {
+      // Remove all except #cartEmpty
+      const children = Array.from(cartItems.children);
+      children.forEach(c => { if (c.id !== 'cartEmpty') c.remove(); });
+
+      cart.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'glass rounded-2xl p-4 border border-white/5 animate-slide-up';
+        div.innerHTML = `
+          <div class="flex gap-3">
+            <img src="${item.image}" alt="${item.name}" class="w-16 h-16 rounded-xl object-cover flex-shrink-0" />
+            <div class="flex-1 min-w-0">
+              <h4 class="text-sm font-semibold text-cream truncate">${item.name}</h4>
+              <p class="text-xs text-slate-500">${item.category}</p>
+              <p class="text-sm font-bold text-sage mt-1">$${item.price.toFixed(2)}</p>
+            </div>
+            <button onclick="removeFromCart(${item.id})" class="p-1.5 rounded-lg text-slate-500 hover:text-rose-400 hover:bg-white/5 transition-all self-start flex-shrink-0" aria-label="Remove item">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+            </button>
+          </div>
+          <!-- Qty Controls -->
+          <div class="flex items-center justify-between mt-3 pt-3 border-t border-white/5">
+            <div class="flex items-center gap-2">
+              <button onclick="updateQty(${item.id}, -1)" class="w-7 h-7 rounded-lg glass border border-white/10 flex items-center justify-center text-slate-400 hover:text-sage hover:border-sage/30 transition-all text-sm font-bold">-</button>
+              <span class="text-sm font-semibold text-cream w-6 text-center">${item.qty}</span>
+              <button onclick="updateQty(${item.id}, 1)" class="w-7 h-7 rounded-lg glass border border-white/10 flex items-center justify-center text-slate-400 hover:text-sage hover:border-sage/30 transition-all text-sm font-bold">+</button>
+            </div>
+            <span class="text-sm font-bold text-cream">$${(item.price * item.qty).toFixed(2)}</span>
+          </div>
+          <!-- Per-Item Affiliate Button -->
+          <a href="${item.affiliateUrl}" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 w-full mt-3 py-2.5 rounded-xl bg-gradient-to-r from-sage to-teal text-white font-semibold text-xs shadow-md shadow-sage/10 hover:shadow-sage/25 hover:scale-[1.01] transition-all duration-300">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Buy on AliExpress
+          </a>
+        `;
+        cartItems.appendChild(div);
+      });
+    }
+
+    /* ── Cart Drawer Toggle ── */
+    function openCart() {
+      cartOverlay.classList.remove('hidden');
+      requestAnimationFrame(() => { cartOverlay.classList.add('opacity-100'); });
+      cartDrawer.classList.remove('translate-x-full');
+      cartDrawer.classList.add('animate-drawer-in');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeCart() {
+      cartOverlay.classList.remove('opacity-100');
+      cartDrawer.classList.add('animate-drawer-out');
+      setTimeout(() => {
+        cartDrawer.classList.remove('animate-drawer-in', 'animate-drawer-out');
+        cartDrawer.classList.add('translate-x-full');
+        cartOverlay.classList.add('hidden');
+        document.body.style.overflow = '';
+      }, 300);
+    }
+
+    cartBtn.addEventListener('click', openCart);
+    closeCartBtn.addEventListener('click', closeCart);
+    cartOverlay.addEventListener('click', closeCart);
+    continueBtn.addEventListener('click', closeCart);
+
+    /* ── Toast ── */
+    let toastTimer;
+    function showToast(msg) {
+      toastMsg.textContent = msg;
+      toast.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none');
+      toast.classList.add('opacity-100', 'translate-y-0');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        toast.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none');
+        toast.classList.remove('opacity-100', 'translate-y-0');
+      }, 2500);
+    }
+
+    /* ── Mobile Menu ── */
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    // Close mobile menu on link click
+    mobileMenu.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+    });
+
+    /* ── Mobile Search Toggle ── */
+    searchToggle.addEventListener('click', () => {
+      mobileSearchBr.classList.toggle('hidden');
+      if (!mobileSearchBr.classList.contains('hidden')) {
+        mobileSearchIn.focus();
+      }
+    });
+
+    /* ── Newsletter ── */
+    newsletterForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      $('#newsletterSuccess').classList.remove('hidden');
+      newsletterForm.classList.add('hidden');
+    });
+
+    /* ── Navbar scroll effect ── */
+    let lastScroll = 0;
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      const nav = $('#navbar');
+      if (y > 80) {
+        nav.classList.add('shadow-xl', 'shadow-black/10');
+      } else {
+        nav.classList.remove('shadow-xl', 'shadow-black/10');
+      }
+      lastScroll = y;
+    }, { passive: true });
+
+    /* ── Intersection Observer for animations ── */
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.animationPlayState = 'running';
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    /* ── Init ── */
+    loadProducts();
+
+  })();
+  </script>
+
+</body>
+</html>
