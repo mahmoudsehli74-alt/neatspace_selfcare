@@ -18,5 +18,23 @@
     ],
     "image": "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=600&h=600&fit=crop&q=80",
     "affiliateUrl": "https://www.aliexpress.com/item/REPLACE_WITH_YOUR_PRODUCT_ID_1.html"
+  },
+  {
+    "id": 2,
+    "name": "Live Link Verification Test - neatspace_selfcare",
+    "title": "Live Link Verification Test - neatspace_selfcare",
+    "description": "",
+    "price": "49.99",
+    "originalPrice": "49.99",
+    "image": "https://example.com/live_test.jpg",
+    "category": "",
+    "rating": 4.5,
+    "style_used": "none",
+    "alt_text": "Photo of Live Link Verification Test - neatspace_selfcare",
+    "tagline": "",
+    "reviews": 0,
+    "badge": "",
+    "features": [],
+    "affiliateUrl": ""
   }
 ]
