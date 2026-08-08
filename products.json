@@ -180,5 +180,23 @@
     "badge": "",
     "features": [],
     "affiliateUrl": ""
+  },
+  {
+    "id": 11,
+    "name": "Vitamin C Serum - 20% with Hyaluronic Acid",
+    "title": "Vitamin C Serum - 20% with Hyaluronic Acid",
+    "description": "Clinical-grade 20% Vitamin C serum with hyaluronic acid and vitamin E. Brightens skin, fades dark spots, boosts collagen production.",
+    "price": "$16.99",
+    "originalPrice": "$16.99",
+    "image": "https://ae01.alicdn.com/kf/Ss9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4/Vitamin-C-Serum-Hyaluronic-Acid.jpg",
+    "category": "",
+    "rating": 4.5,
+    "style_used": "none",
+    "alt_text": "Photo of Vitamin C Serum - 20% with Hyaluronic Acid",
+    "tagline": "",
+    "reviews": 0,
+    "badge": "",
+    "features": [],
+    "affiliateUrl": ""
   }
 ]
